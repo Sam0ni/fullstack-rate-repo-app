@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import LangBadge from "./LanguageBadge";
 import RepoImage from "./RepoImage";
+import Text from "./Text";
 
 const styles = StyleSheet.create({
   flexItem1: {
@@ -12,9 +13,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingLeft: 10,
   },
-  boldText: {
-    fontWeight: "bold",
-  },
 });
 
 const RepoInfo = ({ fullName, desc, img, lang }) => {
@@ -22,7 +20,7 @@ const RepoInfo = ({ fullName, desc, img, lang }) => {
     <View style={styles.flexItem1}>
       <RepoImage url={img} />
       <View style={styles.flexItem2}>
-        <Text style={styles.boldText}>{fullName}</Text>
+        <Text fontWeight="bold">{fullName}</Text>
         <Text>{desc}</Text>
         <LangBadge lang={lang} />
       </View>

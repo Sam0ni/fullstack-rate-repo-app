@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import Text from "./Text";
 
 const styles = StyleSheet.create({
   language: {
@@ -7,14 +8,15 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 3,
     textAlign: "center",
-    color: "white",
   },
 });
 
 const LangBadge = ({ lang }) => {
   return (
     <View>
-      <Text style={styles.language}>{lang}</Text>
+      <Text style={styles.language} color="white">
+        {lang}
+      </Text>
     </View>
   );
 };

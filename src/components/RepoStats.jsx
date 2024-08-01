@@ -1,4 +1,5 @@
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import Text from "./Text";
 
 const turnToKs = (val) => {
   if (val < 1000) {
@@ -22,9 +23,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingLeft: 10,
   },
-  boldText: {
-    fontWeight: "bold",
-  },
 });
 
 const RepoStats = ({ stars, forks, reviews, ratings }) => {
@@ -41,7 +39,7 @@ const RepoStats = ({ stars, forks, reviews, ratings }) => {
         {valuesWithNames.map((value) => {
           return (
             <View key={value[0]} style={styles.flexItem2}>
-              <Text style={styles.boldText}>{value[1]}</Text>
+              <Text fontWeight="bold">{value[1]}</Text>
               <Text>{value[0]}</Text>
             </View>
           );

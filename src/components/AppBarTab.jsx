@@ -1,11 +1,7 @@
-import { Pressable, Text } from "react-native";
+import Text from "./Text";
 
-const AppBarTab = ({ textStyle, children }) => {
-  return (
-    <Pressable>
-      <Text style={textStyle}>{children}</Text>
-    </Pressable>
-  );
+const AppBarTab = ({ style, children }) => {
+  return <Text style={style}>{children}</Text>;
 };
 
 export default AppBarTab;
