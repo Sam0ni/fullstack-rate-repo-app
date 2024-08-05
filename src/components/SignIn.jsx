@@ -2,6 +2,8 @@ import { useFormik } from "formik";
 import Text from "./Text";
 import { Pressable, TextInput, View, StyleSheet } from "react-native";
 import * as yup from "yup";
+import useSignIn from "../hooks/useSignIn";
+import { useNavigate } from "react-router-native";
 
 const initialValues = {
   username: "",
@@ -62,7 +64,11 @@ const SignInForm = ({ onSubmit }) => {
         placeholder="Username"
         value={formik.values.username}
         onChangeText={formik.handleChange("username")}
-        style={!formik.errors.username ? styles.input : styles.errorInput}
+        style={
+          formik.touched.username && formik.errors.username
+            ? styles.errorInput
+            : styles.input
+        }
       />
       {formik.touched.username && formik.errors.username && (
         <Text style={{ color: "red", paddingLeft: 10 }}>
@@ -74,7 +80,11 @@ const SignInForm = ({ onSubmit }) => {
         value={formik.values.password}
         onChangeText={formik.handleChange("password")}
         secureTextEntry={true}
-        style={!formik.errors.password ? styles.input : styles.errorInput}
+        style={
+          formik.touched.password && formik.errors.password
+            ? styles.errorInput
+            : styles.input
+        }
       />
       {formik.touched.password && formik.errors.password && (
         <Text style={{ color: "red", paddingLeft: 10 }}>
@@ -91,8 +101,20 @@ const SignInForm = ({ onSubmit }) => {
 };
 
 const SignIn = () => {
-  const onSubmit = (values) => {
-    console.log(values);
+  const [signIn] = useSignIn();
+  const navigate = useNavigate();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+
+    try {
+      const { data } = await signIn({ username, password });
+      if (data.authenticate) {
+        navigate("/");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
   return <SignInForm onSubmit={onSubmit} />;
 };

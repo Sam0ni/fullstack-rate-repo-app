@@ -1,7 +1,11 @@
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, Pressable } from "react-native";
+import Text from "./Text";
 import Constants from "expo-constants";
 import AppBarTab from "./AppBarTab";
 import { Link } from "react-router-native";
+import { useQuery } from "@apollo/client";
+import { GET_ME } from "../graphql/queries";
+import useSignOut from "../hooks/useSignOut";
 
 const styles = StyleSheet.create({
   container: {
@@ -18,15 +22,27 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+  const { loading, error, data } = useQuery(GET_ME);
+  const signOut = useSignOut();
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
   return (
     <View style={styles.container}>
       <ScrollView horizontal>
         <Link to="/">
           <AppBarTab style={styles.text}>Repositories</AppBarTab>
         </Link>
-        <Link to="/signin">
-          <AppBarTab style={styles.text}>Sign In</AppBarTab>
-        </Link>
+        {data.me == null && (
+          <Link to="/signin">
+            <AppBarTab style={styles.text}>Sign In</AppBarTab>
+          </Link>
+        )}
+        {data.me != null && (
+          <Pressable onPress={signOut}>
+            <AppBarTab style={styles.text}>Sign out</AppBarTab>
+          </Pressable>
+        )}
       </ScrollView>
     </View>
   );
