@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-  const { loading, error, data } = useQuery(GET_ME);
+  const { loading, data } = useQuery(GET_ME);
   const signOut = useSignOut();
   if (loading) {
     return <Text>Loading...</Text>;

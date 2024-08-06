@@ -8,7 +8,13 @@ const turnToKs = (val) => {
     return 0;
   }
   let KVal = String(val);
-  KVal = `${KVal.slice(0, 2)}.${KVal[2]}k`;
+  if (val >= 100000) {
+    KVal = `${KVal.slice(0, 3)}.${KVal[3]}k`;
+  } else if (val >= 10000) {
+    KVal = `${KVal.slice(0, 2)}.${KVal[2]}k`;
+  } else {
+    KVal = `${KVal.slice(0, 1)}.${KVal[1]}k`;
+  }
   return KVal;
 };
 

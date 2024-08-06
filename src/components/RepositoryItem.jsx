@@ -20,12 +20,12 @@ const RepositoryItem = ({
   img,
 }) => {
   return (
-    <View style={styles.flexContainer}>
+    <View style={styles.flexContainer} testID="repositoryItem">
       <RepoInfo fullName={fullName} desc={desc} lang={lang} img={img} />
       <RepoStats
         forks={forks}
         stars={stars}
-        rating={rating}
+        ratings={rating}
         reviews={reviews}
       />
     </View>
