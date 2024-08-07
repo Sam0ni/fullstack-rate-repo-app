@@ -4,6 +4,7 @@ import { Pressable, TextInput, View, StyleSheet } from "react-native";
 import * as yup from "yup";
 import useSignIn from "../hooks/useSignIn";
 import { useNavigate } from "react-router-native";
+import theme from "../theme";
 
 const initialValues = {
   username: "",
@@ -16,38 +17,13 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flexDirection: "column",
   },
-  text: {
-    color: "white",
-    fontSize: 15,
-    padding: 10,
-  },
-  input: {
-    height: 40,
-    margin: 10,
-    borderWidth: 1,
-    borderColor: "grey",
-    padding: 10,
-    borderRadius: 3,
-  },
-  errorInput: {
-    height: 40,
-    margin: 10,
-    borderWidth: 1,
-    borderColor: "red",
-    padding: 10,
-    borderRadius: 3,
-  },
-  button: {
-    height: 40,
-    margin: 10,
-    padding: 10,
-    backgroundColor: "#0366d6",
-    borderRadius: 3,
-  },
+  input: theme.input,
+  errorInput: theme.errorInput,
+  button: theme.button,
 });
 
 const validationSchema = yup.object().shape({
-  username: yup.string().required("Username is a required"),
+  username: yup.string().required("Username is required"),
   password: yup.string().required("Password is required"),
 });
 
@@ -71,9 +47,7 @@ export const SignInForm = ({ onSubmit }) => {
         }
       />
       {formik.touched.username && formik.errors.username && (
-        <Text style={{ color: "red", paddingLeft: 10 }}>
-          {formik.errors.username}
-        </Text>
+        <Text error="error">{formik.errors.username}</Text>
       )}
       <TextInput
         placeholder="Password"
@@ -87,9 +61,7 @@ export const SignInForm = ({ onSubmit }) => {
         }
       />
       {formik.touched.password && formik.errors.password && (
-        <Text style={{ color: "red", paddingLeft: 10 }}>
-          {formik.errors.password}
-        </Text>
+        <Text error="error">{formik.errors.password}</Text>
       )}
       <Pressable onPress={formik.handleSubmit} style={styles.button}>
         <Text fontWeight="bold" color="white" style={{ textAlign: "center" }}>

@@ -39,6 +39,11 @@ const AppBar = () => {
           </Link>
         )}
         {data.me != null && (
+          <Link to="/review">
+            <AppBarTab style={styles.text}>Create a review</AppBarTab>
+          </Link>
+        )}
+        {data.me != null && (
           <Pressable onPress={signOut}>
             <AppBarTab style={styles.text}>Sign out</AppBarTab>
           </Pressable>
