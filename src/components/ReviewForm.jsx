@@ -115,7 +115,6 @@ const Review = () => {
         repositoryName,
         text: review,
       });
-      console.log(data);
       if (data.createReview.repositoryId) {
         navigate(`/${data.createReview.repositoryId}`);
       }
